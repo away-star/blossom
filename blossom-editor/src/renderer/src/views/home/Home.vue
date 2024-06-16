@@ -30,7 +30,7 @@
           </bl-col>
           <!-- 统计卡片 -->
           <bl-col width="200px">
-            <bl-row class="container-sub-name">Blossom Statistic</bl-row>
+            <bl-row class="container-sub-name">{{configStore.phraseology.projectName}} Statistic</bl-row>
             <StatisticCard></StatisticCard>
           </bl-col>
         </bl-row>
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <!-- 
+    <!--
       =======================================================
       middle
       =======================================================
@@ -85,7 +85,7 @@
       </bl-col>
     </div>
 
-    <!-- 
+    <!--
       =======================================================
       right
       =======================================================
@@ -144,6 +144,7 @@ const { userinfo } = storeToRefs(userStore)
 const ChartLineWordsRef = ref()
 const SentinelChartLineRef = ref()
 const ChartHeatmapRef = ref()
+const configStore = useConfigStore()
 
 onActivated(() => (now.value = nowWhen()))
 const loadWordLine = () => ChartLineWordsRef.value.reload()

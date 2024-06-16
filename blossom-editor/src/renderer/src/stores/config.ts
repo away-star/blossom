@@ -78,6 +78,13 @@ export interface PicStyle {
   isAddSuffix: boolean
 }
 
+
+export interface Phraseology {
+  // 项目名字
+  projectName: string
+
+}
+
 /**
  * 快捷键配置
  */
@@ -91,6 +98,8 @@ export interface BlConfig {
   picStyle: PicStyle
   editorStyle: EditorStyle
   keymapConfig: KeymapConfig
+  phraseology: Phraseology
+
 }
 
 /**
@@ -144,8 +153,13 @@ export const useConfigStore = defineStore('configStore', {
       ...Local.get(VIEW_STYLE_KEY)
     },
     // 快捷键
-    keymapConfig: {}
+    keymapConfig: {},
+    // 项目名字
+    phraseology: {
+      projectName: 'Cross-end Blog'
+    }
   }),
+
   /**
    * 因为配置涉及到 LOCAL_STORAGE 的持久化, 所以无法通过响应式进行修改
    */

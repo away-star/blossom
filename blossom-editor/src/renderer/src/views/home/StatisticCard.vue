@@ -1,18 +1,22 @@
 <template>
   <div>
-    <div class="statistic-article-root">
+    <div class="statistic-article-root" @click="toRoute('/articleIndex')">
+      <!--      点击后跳转到文章页面-->
       <div class="statistic">
         <div class="main-stat"><span style="font-size: 20px">A</span>{{ formartNumber(article.articleCount) }}</div>
-        <div class="sub-stat"><span class="iconbl bl-pen-line"></span> Words {{ formartNumber(article.articleWords) }}</div>
+        <div class="sub-stat"><span class="iconbl bl-pen-line"></span> Words {{ formartNumber(article.articleWords) }}
+        </div>
       </div>
       <div class="iconbl bl-a-texteditorhighlightcolor-line icon"></div>
       <div class="iconbl bl-a-texteditorhighlightcolor-line icon-shadow"></div>
     </div>
 
-    <div class="statistic-picture-root">
+    <div class="statistic-picture-root" @click="toRoute('/pictureIndex')">
       <div class="statistic">
         <div class="main-stat"><span style="font-size: 20px">P</span>{{ formartNumber(picture.pictureCount) }}</div>
-        <div class="sub-stat"><span class="iconbl bl-a-cloudstorage-line"></span> Size {{ formatFileSize(picture.pictureSize) }}</div>
+        <div class="sub-stat"><span class="iconbl bl-a-cloudstorage-line"></span> Size
+          {{ formatFileSize(picture.pictureSize) }}
+        </div>
       </div>
       <div class="iconbl bl-image--line icon"></div>
       <div class="iconbl bl-image--line icon-shadow"></div>
@@ -21,10 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { articleWordsApi, pictureStatApi } from '@renderer/api/blossom'
-import { ref } from 'vue'
-import { formatFileSize, formartNumber } from '@renderer/assets/utils/util'
-import { useLifecycle } from '@renderer/scripts/lifecycle'
+import {articleWordsApi, pictureStatApi} from '@renderer/api/blossom'
+import {ref} from 'vue'
+import {formartNumber, formatFileSize} from '@renderer/assets/utils/util'
+import {useLifecycle} from '@renderer/scripts/lifecycle'
+import {toRoute} from "../../router";
 
 useLifecycle(
   () => {
@@ -37,8 +42,8 @@ useLifecycle(
   }
 )
 
-let article = ref({ articleCount: 0, articleWords: 0 })
-let picture = ref({ pictureCount: 0, pictureSize: 0 })
+let article = ref({articleCount: 0, articleWords: 0})
+let picture = ref({pictureCount: 0, pictureSize: 0})
 
 const getArticleWords = () => {
   articleWordsApi().then((resp) => {
@@ -59,6 +64,8 @@ const getPictureStat = () => {
   @include box(200px, 95px);
   @include flex(row, flex-start, center);
   @include themeColor(#727272, #929292);
+  // 鼠标放上面变手指
+  cursor: pointer;
   text-shadow: var(--bl-text-shadow);
   border: 3px solid var(--el-color-primary-light-7);
   padding: 10px 0;
@@ -85,6 +92,7 @@ const getPictureStat = () => {
 
   .statistic {
     @include box(calc(100% - 70px), 100%);
+
     text-align: right;
     z-index: 2;
 

@@ -24,6 +24,8 @@ import IconListIndex from '@renderer/components/IconList.vue'
 import ArticleViewWindow from '@renderer/views/article/ArticleViewWindow.vue'
 import ArticleReference from '@renderer/views/article/ArticleReferenceChartGraph.vue'
 import ArticleHistory from '@renderer/views/article/ArticleHistory.vue'
+import {useConfigStore} from "../stores/config";
+const configStore=useConfigStore();
 
 router.addRoute({
   path: '/',
@@ -36,19 +38,19 @@ router.addRoute({
   component: Index,
   meta: { keepAlive: true },
   children: [
-    { path: '/home', name: 'Home', component: Home, meta: { keepAlive: true, title: 'Blossom 首页' } },
-    { path: '/settingIndex', name: 'SettingIndex', component: SettingIndex, meta: { keepAlive: false, title: 'Blossom 设置' } },
+    { path: '/home', name: 'Home', component: Home, meta: { keepAlive: true, title: configStore.phraseology.projectName + ' 首页' } },
+    { path: '/settingIndex', name: 'SettingIndex', component: SettingIndex, meta: { keepAlive: false, title:configStore.phraseology.projectName+ ' 设置' } },
     // 功能页面
-    { path: '/articleIndex', name: 'ArticleIndex', component: ArticleIndex, meta: { keepAlive: true, title: 'Blossom 文章编辑' } },
-    { path: '/pictureIndex', name: 'PictureIndex', component: PictureIndex, meta: { keepAlive: true, title: 'Blossom 资源库' } },
-    { path: '/todoIndex', name: 'TodoIndex', component: TodoIndex, meta: { keepAlive: true, title: 'Blossom 待办事项' } },
-    { path: '/noteIndex', name: 'NoteIndex', component: NoteIndex, meta: { keepAlive: false, title: 'Blossom 便签' } },
-    { path: '/planIndex', name: 'PlanIndex', component: PlanIndex, meta: { keepAlive: false, title: 'Blossom 日历计划' } },
+    { path: '/articleIndex', name: 'ArticleIndex', component: ArticleIndex, meta: { keepAlive: true, title: configStore.phraseology.projectName +' 文章编辑' } },
+    { path: '/pictureIndex', name: 'PictureIndex', component: PictureIndex, meta: { keepAlive: true, title: configStore.phraseology.projectName + ' 图片管理' } },
+    { path: '/todoIndex', name: 'TodoIndex', component: TodoIndex, meta: { keepAlive: true, title: configStore.phraseology.projectName + ' 任务管理' } },
+    { path: '/noteIndex', name: 'NoteIndex', component: NoteIndex, meta: { keepAlive: false, title: configStore.phraseology.projectName + ' 笔记管理' } },
+    { path: '/planIndex', name: 'PlanIndex', component: PlanIndex, meta: { keepAlive: false, title: configStore.phraseology.projectName + ' 计划管理' } },
     {
       path: '/iconListIndex',
       name: 'IconListIndex',
       component: IconListIndex,
-      meta: { keepAlive: false, title: 'Blossom 图标库' },
+      meta: { keepAlive: false, title: configStore.phraseology.projectName + '图标库' },
       props: {
         window: false
       }

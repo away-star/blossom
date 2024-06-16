@@ -3,8 +3,8 @@ const blossom = {
    * 基础配置
    */
   SYS: {
-    NAME: 'Blossom',
-    FULL_NAME: 'BLOSSOM-EDITOR',
+    NAME: 'Cross-end Blog',
+    FULL_NAME: 'Cross-end Blog',
     VERSION: 'v1.16.0',
 
     //

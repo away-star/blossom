@@ -130,7 +130,7 @@ function createMainWindow(): void {
   if (mainWindow != undefined) {
     return
   }
-  mainWindow = buildWindow('Blossom')
+  mainWindow = buildWindow('Cross-end Blog')
   mainWindow.setMenu(null)
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
@@ -168,12 +168,12 @@ const initTray = () => {
   console.log('1. 创建托盘 Tray')
   tray = new Tray(icon)
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Blossom 官网 ', click: () => shell.openExternal('https://www.wangyunf.com/blossom-doc/index') },
+    { label: 'Cross-end Blog 官网 ', click: () => shell.openExternal('https://www.wangyunf.com/blossom-doc/index') },
     { type: 'separator' },
     { label: '显示', click: () => mainWindow!.show() },
     { label: '退出', click: () => app.quit() }
   ])
-  tray.setToolTip('Blossom\n未登录')
+  tray.setToolTip('Cross-end Blog\n未登录')
   tray.setContextMenu(contextMenu)
   tray.addListener('double-click', () => {
     mainWindow!.show()
@@ -382,7 +382,7 @@ const initOnMainWindow = (mainWindow: BrowserWindow): void => {
     blossomUserinfo = userinfo
     console.log('当前登录用户:', userinfo)
     if (platform.isWindows) {
-      tray.setToolTip(`Blossom\n用户: ${userinfo.username}\n昵称: ${userinfo.nickName}`)
+      tray.setToolTip(`Cross-end Blog\n用户: ${userinfo.username}\n昵称: ${userinfo.nickName}`)
     }
   })
   /**

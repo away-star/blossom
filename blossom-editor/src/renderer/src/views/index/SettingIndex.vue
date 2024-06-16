@@ -8,12 +8,21 @@
           </div>
         </div>
       </el-tab-pane>
+      <el-tab-pane label="注册" name="register">
+        <div class="setting-container">
+          <div class="wrapper">
+<!--            <SettingLogin></SettingLogin>-->
+            <SettingRegister></SettingRegister>
+          </div>
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="设置" name="setting">
         <SettingConfig></SettingConfig>
       </el-tab-pane>
-      <el-tab-pane label="关于" name="about">
-        <SettingAboutVue></SettingAboutVue>
-      </el-tab-pane>
+<!--      <el-tab-pane label="关于" name="about">-->
+<!--        <SettingAboutVue></SettingAboutVue>-->
+<!--&lt;!&ndash;          <SettingRegister></SettingRegister>&ndash;&gt;-->
+<!--      </el-tab-pane>-->
     </el-tabs>
   </div>
   <div class="version">
@@ -30,12 +39,13 @@ import SettingLogin from './SettingLogin.vue'
 import SettingConfig from './SettingConfig.vue'
 import SettingAboutVue from './SettingAbout.vue'
 import CONFIG from '@renderer/assets/constants/system'
+import SettingRegister from "./SettingRegister.vue";
 
 const userStore = useUserStore()
 const route = useRoute()
 
 onMounted(() => {
-  document.title = 'Blossom 设置'
+  document.title = 'Cross-end Blog 设置'
   let actTab = route.query.activeTab as string
   if (isNotBlank(actTab)) {
     activeTab.value = actTab

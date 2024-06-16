@@ -4,7 +4,7 @@
   </div>
   <div class="icon-list-root">
     <div class="icon-desc">
-      <h2>Blossom 图标</h2>
+      <h2>Cross-end Blog 图标</h2>
       {{ iconDesc }}
       <div v-show="activeTab === 'weblogo' || activeTab === 'blossom'" style="padding: 10px 0">
         <el-input v-model="iconSearch" size="large" style="width: 300px" placeholder="查询图标"></el-input>
@@ -46,9 +46,11 @@ import AppHeader from '@renderer/components/AppHeader.vue'
 //
 import blossomIcons from '@renderer/assets/iconfont/blossom/iconfont.json'
 import weblogIcons from '@renderer/assets/iconfont/weblogo/iconfont.json'
+import {useConfigStore} from "../stores/config";
+const configStore=useConfigStore()
 
 onMounted(() => {
-  document.title = 'Blossom 图标库'
+  document.title = configStore.phraseology.projectName+ ' 图标库'
   blossom.value = blossomIcons.glyphs
   weblogo.value = weblogIcons.glyphs.sort((w1, w2) => {
     return w1.font_class.localeCompare(w2.font_class)

@@ -1,5 +1,6 @@
 <template>
   <div class="index-aside-root">
+<!--     todo 设置logo-->
     <div class="item-logo" v-if="!viewStyle.isShowAsideSimple && viewStyle.isShowAsideLogo">
       <logo :name="true"></logo>
     </div>
@@ -87,15 +88,15 @@ watch(
  * 跳转页面, 非登录状态无法跳转
  */
 const toRoute = (menu: AsideMenu) => {
-  if (menu.login && !isLogin()) {
-    ElNotification.error({
-      title: '未登录',
-      message: `你的登录状态已失效, 请在左下角登录 ↙`,
-      offset: 30,
-      position: 'bottom-left'
-    })
-    return
-  }
+  // if (menu.login && !isLogin()) {
+  //   ElNotification.error({
+  //     title: '未登录',
+  //     message: `你的登录状态已失效, 请在左下角登录 ↙`,
+  //     offset: 30,
+  //     position: 'bottom-left'
+  //   })
+  //   return
+  // }
   activeMenuPath.value = menu.path
   router.push(menu.path)
 }

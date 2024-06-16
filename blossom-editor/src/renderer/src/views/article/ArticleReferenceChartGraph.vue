@@ -13,15 +13,15 @@
       <bl-row style="margin-top: 10px">
         <el-checkbox v-model="showOutsideName" border @change="getArticleRefList(false)">显示外网文章名称</el-checkbox>
       </bl-row>
-      <bl-row class="title" just="center"> 文章引用网络 </bl-row>
+      <bl-row class="title" just="center"> 文章引用网络</bl-row>
       <bl-row just="center">
         <bl-col class="symbol" just="center">
           <div class="inside"></div>
-          内部文章<br /><span>({{ stat.inside }}篇)</span>
+          内部文章<br/><span>({{ stat.inside }}篇)</span>
         </bl-col>
         <bl-col class="symbol" just="center">
           <div class="outside"></div>
-          外网文章<br /><span>({{ stat.outside }}篇)</span>
+          外网文章<br/><span>({{ stat.outside }}篇)</span>
         </bl-col>
       </bl-row>
     </div>
@@ -39,20 +39,21 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import { ref, onMounted, onUnmounted } from 'vue'
-import { useDark } from '@vueuse/core'
-import { articleRefListApi } from '@renderer/api/blossom'
-import { useUserStore } from '@renderer/stores/user'
+import {useRoute} from 'vue-router'
+import {onMounted, onUnmounted, ref} from 'vue'
+import {useDark} from '@vueuse/core'
+import {articleRefListApi} from '@renderer/api/blossom'
+import {useUserStore} from '@renderer/stores/user'
 
 // echarts
 import * as echarts from 'echarts/core'
-import { TitleComponent, TooltipComponent, LegendComponent } from 'echarts/components'
-import { GraphChart } from 'echarts/charts'
-import { CanvasRenderer } from 'echarts/renderers'
-import { isNotBlank, isNotNull } from '@renderer/assets/utils/obj'
-import { getPrimaryColor } from '@renderer/scripts/global-theme'
+import {LegendComponent, TitleComponent, TooltipComponent} from 'echarts/components'
+import {GraphChart} from 'echarts/charts'
+import {CanvasRenderer} from 'echarts/renderers'
+import {isNotBlank, isNotNull} from '@renderer/assets/utils/obj'
+import {getPrimaryColor} from '@renderer/scripts/global-theme'
 import AppHeader from '@renderer/components/AppHeader.vue'
+import {useConfigStore} from "../../stores/config";
 
 echarts.use([TitleComponent, TooltipComponent, LegendComponent, GraphChart, CanvasRenderer])
 
@@ -60,6 +61,7 @@ const isDark = useDark()
 
 const route = useRoute()
 const userStore = useUserStore()
+const configStore = useConfigStore()
 
 // -------------------- data
 const showOutsideName = ref(false)
@@ -73,13 +75,13 @@ let stat = ref({
   outside: 0
 })
 
-let inside: any = { itemStyle: {}, label: {} }
-let insideUnknown: any = { itemStyle: {}, label: {} }
-let outside: any = { itemStyle: {}, label: {} }
+let inside: any = {itemStyle: {}, label: {}}
+let insideUnknown: any = {itemStyle: {}, label: {}}
+let outside: any = {itemStyle: {}, label: {}}
 const changeStyle = () => {
   let primaryColor = getPrimaryColor()
   // 节点数量统计
-  stat.value = { inside: 0, outside: 0 }
+  stat.value = {inside: 0, outside: 0}
   inside = {
     itemStyle: {
       color: primaryColor.color
@@ -123,9 +125,9 @@ const getArticleRefList = (onlyInner: boolean) => {
   changeStyle()
   let param: any
   if (isNotNull(articleId) && isNotBlank(articleId)) {
-    param = { onlyInner: onlyInner, articleId: articleId }
+    param = {onlyInner: onlyInner, articleId: articleId}
   } else {
-    param = { onlyInner: onlyInner }
+    param = {onlyInner: onlyInner}
   }
   articleRefListApi(param).then((resp) => {
     nodes = resp.data.nodes.map((node: any) => {
@@ -282,17 +284,17 @@ const renderChart = () => {
         },
         blur: {
           // itemStyle: { opacity: 0.1 },
-          lineStyle: { opacity: 0.1 },
-          label: { show: false },
-          edgeLabel: { show: false }
+          lineStyle: {opacity: 0.1},
+          label: {show: false},
+          edgeLabel: {show: false}
         },
         data: nodes,
         links: links,
         categories:
           nodes.length > 0
             ? nodes.map((item: any) => {
-                return item.name
-              })
+              return item.name
+            })
             : ''
       }
     ]
@@ -307,6 +309,7 @@ const init = () => {
  * 防抖
  */
 let debounceTimeout: NodeJS.Timeout | undefined
+
 function debounce(fn: () => void, time = 500) {
   if (debounceTimeout != undefined) {
     clearTimeout(debounceTimeout)
@@ -321,7 +324,7 @@ const windowResize = () => {
 }
 
 onMounted(() => {
-  document.title = 'Blossom 双链图表'
+  document.title = configStore.phraseology.projectName + ' 双链图表'
   init()
   windowResize()
   articleId = route.query.articleId as string
@@ -338,6 +341,7 @@ onUnmounted(() => {
 .header {
   @include box(100%, 30px);
 }
+
 .article-reference-root {
   @include box(100%, calc(100% - 30px));
   position: relative;

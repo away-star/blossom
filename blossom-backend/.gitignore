@@ -38,3 +38,4 @@ build/
 ### VS Code ###
 .vscode/
 /logs/
+/backend/src/main/resources/config/application-mydev.yml

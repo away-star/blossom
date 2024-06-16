@@ -50,6 +50,11 @@ public class CaffeineTokenValidateFilter {
         // 解析请求头中的 token
         String token = getHeaderToken(request);
 
+        if (token==null){
+
+        }
+
+
         // 如果白名单且无token, 则直接放行
         if (isWhiteList && StrUtil.isBlank(token)) {
             return;
