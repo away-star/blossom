@@ -1,8 +1,5 @@
 # Blossom-backend
 
-Blossom 笔记软件的后台服务
-
-[Blossom 后台部署文档](https://www.wangyunf.com/blossom-doc/guide/deploy/backend.html)
 
 # 模块说明
 
@@ -60,18 +57,3 @@ docker build -t jasminexzzz/blossom:dev -f Dockerfile .
    - 镜像标记：jasminexzzz/blossom:dev
 4. 添加执行前操作: 添加 运行Maven目标，配置命令 `clean package`，确认
 5. 确定保存
-
-### 运行镜像的参数参考
-
-```shell
-docker run -d \
-  --name blossom-dev \
-  -p 9999:9999 \
-  -v ~/blossom:/home/bl \
-  jasminexzzz/blossom:dev \
-  --spring.profiles.active=prod \
-  --project.iaas.blos.domain="http://192.168.2.222:9999/pic/" \
-  --spring.datasource.url="jdbc:mysql://192.168.2.222:3306/blossom?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&&serverTimezone=GMT%2B8" \
-  --spring.datasource.username=root \
-  --spring.datasource.password=123456 
-```

@@ -71,7 +71,6 @@ public class UserController {
      *
      * @apiNote 需要管理员权限
      */
-    @AuthUserType(UserTypeEnum.ADMIN)
     @PostMapping("/add")
     public R<?> add(@Validated @RequestBody UserAddReq req) {
         userService.insert(req);

@@ -156,7 +156,7 @@ export const useConfigStore = defineStore('configStore', {
     keymapConfig: {},
     // 项目名字
     phraseology: {
-      projectName: 'Cross-end Blog'
+      projectName: 'YLBlog'
     }
   }),
 
