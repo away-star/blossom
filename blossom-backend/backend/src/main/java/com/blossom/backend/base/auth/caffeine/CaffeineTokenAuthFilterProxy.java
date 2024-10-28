@@ -16,6 +16,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -79,6 +80,14 @@ public class CaffeineTokenAuthFilterProxy extends AuthFilterProxy {
      */
     @Override
     protected void doFilterInternal(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        log.error("执行过滤器");
+
+        // 打印出路径
+        // log.error(request.getServletContext().getContextPath());
+        log.error(((HttpServletRequest) request).getRequestURI());
+        // log.error();
+
         /*
          1. 执行防火墙
          */

@@ -43,6 +43,7 @@ public class AuthConstant {
         {
             // 登录接口
             this.add("/login");
+            this.add("/user/add");
             // 获取图片验证码接口
             this.add("/captcha/image");
             // 获取手机验证码接口

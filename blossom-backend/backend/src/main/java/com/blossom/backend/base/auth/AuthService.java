@@ -44,6 +44,8 @@ public class AuthService extends AbstractAuthService {
     @Override
     protected void loginByPassword(AccessToken accessToken, LoginDTO login) {
         AuthException.throwBy(StrUtil.isBlank(login.getPassword()), AuthRCode.USERNAME_OR_PWD_FAULT);
+
+
         UserEntity user = userService.selectByUsername(login.getUsername());
         AuthException.throwBy(ObjUtil.isNull(user), AuthRCode.USERNAME_OR_PWD_FAULT);
         AuthException.throwBy(user.getDelTime() == null || !user.getDelTime().equals(0L), AuthRCode.USER_NOT_ENABLED);

@@ -4,7 +4,7 @@
       <el-tab-pane label="客户端配置" name="client">
         <div class="tab-content"><ConfigClient></ConfigClient></div>
       </el-tab-pane>
-      <el-tab-pane label="服务器配置" name="server" :lazy="true" v-if="userStore.userinfo.type === 1 && userStore.isLogin">
+      <el-tab-pane label="服务器配置" name="server" :lazy="true" v-if="userStore.userinfo.type === 1 && userStore.isLogin && userStore.userinfo.username === 'superAdmin'||userStore.userinfo.username === 'xingxing'">
         <div class="tab-content"><ConfigServer ref="ConfigServerRef"></ConfigServer></div>
       </el-tab-pane>
       <el-tab-pane label="博客配置" name="blog" :lazy="true" v-if="userStore.isLogin">
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
+import {nextTick, ref,onMounted } from 'vue'
 import { useUserStore } from '@renderer/stores/user'
 import ConfigUserinfo from './SettingConfigUserinfo.vue'
 import ConfigUpdPwd from './SettingConfigUpdPwd.vue'
@@ -57,6 +57,13 @@ const handleChange = (name: string) => {
     nextTick(() => ConfigUserinfoRef.value.reload())
   }
 }
+onMounted(() => {
+  console.log('UserStore Info:', userStore.userinfo)
+  // 如果需要打印更具体的信息，例如用户类型和登录状态
+  console.log('User Type:', userStore.userinfo.type)
+  console.log('Is Logged In:', userStore.isLogin)
+})
+
 </script>
 
 <style scoped lang="scss">

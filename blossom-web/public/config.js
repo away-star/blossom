@@ -4,7 +4,7 @@ window.blconfig = {
    */
   SYS: {
     // 修改该值可以改变网页左上角名称, 你可以改为你的名称
-    NAME: 'Blossom',
+    NAME: 'Cross-end Blog',
     // 公网安备号
     GONG_WANG_AN_BEI: '',
     // ICP 备案号
@@ -30,7 +30,7 @@ window.blconfig = {
    */
   DOMAIN: {
     // 将该值填写为你的后台访问地址, 与 blossom 客户端登录   页面填写的地址相同
-    PRD: 'http://192.168.31.6:9999',
+    PRD: 'http://localhost:9999',
     // 将该值填写你开放为博客的用户ID
     USER_ID: 1
   },

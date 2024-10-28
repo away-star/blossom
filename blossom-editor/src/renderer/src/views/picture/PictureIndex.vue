@@ -7,7 +7,7 @@
       </div>
 
       <div class="doc-upload">
-        <PictureUpload :repeat-upload="isReplaceUpload"></PictureUpload>
+        <PictureUpload :repeat-upload="isReplaceUpload" :on-action-refresh="refresh"></PictureUpload>
       </div>
     </div>
 
@@ -254,6 +254,7 @@ const getPictureStat = (pid?: string) => {
       pictureStat.value.global.picSize = formatFileSize(resp.data.pictureSize)
     }
   })
+  // refresh()
 }
 
 /**

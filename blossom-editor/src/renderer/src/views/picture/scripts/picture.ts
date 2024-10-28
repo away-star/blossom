@@ -109,6 +109,13 @@ export const uploadDate = (rawFile: UploadRawFile, pid: string, repeatUpload: bo
  * @returns
  */
 export const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
+   // 检查文件类型，允许的图片格式可以根据需要调整
+  const isImage = rawFile.type.startsWith('image/');
+  if (!isImage) {
+    Notify.error('只能上传图片格式的文件！', '上传失败');
+    return false;
+  }
+
   if (rawFile.size / 1024 / 1024 > picStyle.maxSize) {
     Notify.error(`文件大小不能超过 ${picStyle.maxSize}MB!`, '上传失败')
     return false
@@ -123,6 +130,10 @@ export const beforeUpload: UploadProps['beforeUpload'] = (rawFile) => {
  */
 export const onUploadSeccess: UploadProps['onSuccess'] = (resp, _file?) => {
   handleUploadSeccess(resp)
+  // 刷新当前网页
+  // window.location.reload();
+  // props.onActionRefresh();
+
 }
 
 /**

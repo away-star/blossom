@@ -141,14 +141,14 @@ public class SlowSQLInterceptor implements Interceptor {
             }
         }
 
-        for (String value : parameters) {
-            if (value.length() > 500) {
-                sql = sql.replaceFirst("\\?", "!!该参数超长,已忽略!!");
-            } else {
-                sql = sql.replaceFirst("\\?", value);
-            }
-
-        }
+        // for (String value : parameters) {
+        //     if (value.length() > 500) {
+        //         sql = sql.replaceFirst("\\?", "!!该参数超长,已忽略!!");
+        //     } else {
+        //         sql = sql.replaceFirst("\\?", value);
+        //     }
+        //
+        // }
         return sql;
     }
 

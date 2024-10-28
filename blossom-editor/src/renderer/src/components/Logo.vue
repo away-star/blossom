@@ -54,7 +54,7 @@ watch(
 <style scoped lang="scss">
 .logo-root {
   @include flex(column, flex-start, flex-start);
-  @include box(100%, 80px);
+  @include box(100%, 100px);
 
   .logo-img {
     @include box(60px, 58px);

@@ -20,7 +20,7 @@ onMounted(async () => {
   if (isNotBlank(userStore.userParams.WEB_LOGO_NAME)) {
     document.title = userStore.userParams.WEB_LOGO_NAME
   } else {
-    document.title = 'Blossom'
+    document.title = 'Cross-end Blog'
   }
 
   // 优先使用后台配置的博客名称, 否则使用默认的 favicon.png

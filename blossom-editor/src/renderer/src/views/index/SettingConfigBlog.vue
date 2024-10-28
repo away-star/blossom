@@ -7,23 +7,23 @@
     </div>
 
     <el-form :model="userParamForm" label-position="right" label-width="130px" style="max-width: 800px">
-      <el-form-item label="文章查看地址" :required="true">
-        <el-input
-          size="default"
-          style="width: calc(100% - 100px)"
-          v-model="userParamForm.WEB_ARTICLE_URL"
-          @change="(cur: any) => updParam('WEB_ARTICLE_URL', cur)">
-          <template #prefix>
-            <div class="iconbl bl-blog" style="font-size: 20px"></div>
-          </template>
-        </el-input>
-        <el-button size="default" style="width: 90px; margin-left: 10px" @click="toBlog">点击访问博客</el-button>
-        <div class="conf-tip">
-          博客的文章访问地址，即使不使用博客，也推荐配置为后台自带的博客地址。<span style="color: var(--el-color-danger)"
-            >必须以<code style="color: var(--el-color-danger)">/#/articles?articleId=</code>结尾。 </span
-          >你可以点击右上角的<span class="iconbl bl-caution-line" style="padding: 0 3px"></span>图标进行快捷配置。
-        </div>
-      </el-form-item>
+<!--      <el-form-item label="文章查看地址" :required="true">-->
+<!--        <el-input-->
+<!--          size="default"-->
+<!--          style="width: calc(100% - 100px)"-->
+<!--          v-model="userParamForm.WEB_ARTICLE_URL"-->
+<!--          @change="(cur: any) => updParam('WEB_ARTICLE_URL', cur)">-->
+<!--          <template #prefix>-->
+<!--            <div class="iconbl bl-blog" style="font-size: 20px"></div>-->
+<!--          </template>-->
+<!--        </el-input>-->
+<!--        <el-button size="default" style="width: 90px; margin-left: 10px" @click="toBlog">点击访问博客</el-button>-->
+<!--        <div class="conf-tip">-->
+<!--          博客的文章访问地址，即使不使用博客，也推荐配置为后台自带的博客地址。<span style="color: var(&#45;&#45;el-color-danger)"-->
+<!--            >必须以<code style="color: var(&#45;&#45;el-color-danger)">/#/articles?articleId=</code>结尾。 </span-->
+<!--          >你可以点击右上角的<span class="iconbl bl-caution-line" style="padding: 0 3px"></span>图标进行快捷配置。-->
+<!--        </div>-->
+<!--      </el-form-item>-->
 
       <el-divider></el-divider>
 

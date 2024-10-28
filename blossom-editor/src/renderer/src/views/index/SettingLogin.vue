@@ -9,23 +9,6 @@
     </bl-row>
     <div style="width: 100%; text-align: center">
       <bl-row just="center">
-        <div class="input-wrapper" style="width: 500px">
-          <input type="text" class="form__input" placeholder="https://..." v-model="formLogin.serverUrl" @input="handleServerUrl" />
-          <div class="iconbl bl-a-servercloud-line"></div>
-          <div v-if="serverUrlIsInValid" class="server-url-invalid">
-            <el-tooltip effect="light" placement="top">
-              <template #content>
-                登录地址可能存在错误<br />地址中不应包含以下内容：
-                <li>/#/</li>
-              </template>
-              <svg style="height: 20px; width: 20px" aria-hidden="true">
-                <use xlink:href="#wl-jinggao"></use>
-              </svg>
-            </el-tooltip>
-          </div>
-        </div>
-      </bl-row>
-      <bl-row just="center">
         <div class="input-wrapper" style="width: 235px; margin-right: 30px">
           <input
             type="text"
@@ -193,6 +176,13 @@ const formLogin = ref({
   username: '',
   password: ''
 })
+
+onMounted(() => {
+  // 获取当前网址的域名并设置为 serverUrl
+  const currentUrl = `${window.location.protocol}//${window.location.host}`;
+  formLogin.value.serverUrl = currentUrl;
+  checkLogin();
+});
 
 //#endregion
 

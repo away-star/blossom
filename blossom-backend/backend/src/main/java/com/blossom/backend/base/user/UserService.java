@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.blossom.backend.base.auth.AuthContext;
 import com.blossom.backend.base.auth.security.PasswordEncoder;
 import com.blossom.backend.base.paramu.UserParamMapper;
 import com.blossom.backend.base.paramu.UserParamService;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 用户
@@ -82,6 +84,7 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
      * @return 用户信息
      */
     public UserEntity selectByUsername(String username) {
+        // 加上用户类型不是已读
         return baseMapper.selectOne(new LambdaQueryWrapper<UserEntity>().eq(UserEntity::getUsername, username));
     }
 
@@ -90,15 +93,30 @@ public class UserService extends ServiceImpl<UserMapper, UserEntity> {
      */
     @Transactional(rollbackFor = Exception.class)
     public void insert(UserAddReq req) {
-        UserEntity userByUsername = selectByUsername(req.getUsername());
-        XzException400.throwBy(userByUsername != null, "用户名[" + req.getUsername() + "]已存在, 无法重复添加");
         UserEntity user = req.to(UserEntity.class);
+        // 如果是新增只读用户，那么名称上只用匹配只读用户名加当前用户id
+        if (req.getType().equals(UserTypeEnum.READONLY.getType())) {
+            // LambdaQueryWrapper<UserEntity> wrapper = new LambdaQueryWrapper<>();
+            UserEntity userByUsername = selectByUsername(req.getUsername());
+            if (userByUsername != null) {
+                throw new XzException400("仅读账户名[" + req.getUsername() + "]已被他人使用哦, 试试其他的呢");
+            }
+            user.setCreBy(Objects.requireNonNull(AuthContext.getUserId()).toString());
+            user.setUsername(req.getUsername());
+        } else {
+            // 如果是新增普通用户，那么名称上只用匹配用户名
+            UserEntity userByUsername = selectByUsername(req.getUsername());
+            XzException400.throwBy(userByUsername != null, "用户名[" + req.getUsername() + "]已存在, 无法重复添加");
+            user.setCreBy("0");
+            user.setUsername(req.getUsername());
+        }
         user.setNickName(req.getUsername());
         user.setRealName(req.getUsername());
         user.setType(req.getType());
         user.setSalt(SaltUtil.randomSalt());
         user.setPassword(passwordEncoder.encode(req.getPassword() + user.getSalt()));
-        baseMapper.insertUser(user);
+        this.save(user);
+        // baseMapper.insertUser(user);
         userParamService.initUserParams(user.getId());
     }
 

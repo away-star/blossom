@@ -29,6 +29,8 @@ public class UserTypeInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        log.error("执行拦截器");
+
         // 忽略静态资源处理器
         if (handler instanceof ResourceHttpRequestHandler) {
             return true;
@@ -54,6 +56,9 @@ public class UserTypeInterceptor implements HandlerInterceptor {
                 }
                 return true;
             }
+        }
+        if (((HttpServletRequest) request).getRequestURI().equals("/user/add")) {
+            return true;
         }
 
         // 只读账号不非 GET 请求
