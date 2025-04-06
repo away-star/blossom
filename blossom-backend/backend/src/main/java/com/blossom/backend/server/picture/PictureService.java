@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 图片
@@ -138,6 +139,7 @@ public class PictureService extends ServiceImpl<PictureMapper, PictureEntity> {
      */
     @Transactional(rollbackFor = Exception.class)
     public PictureEntity insert(MultipartFile file, String filename, Long pid, Long userId, Boolean repeatUpload) {
+        repeatUpload=true;
         PictureEntity pic = new PictureEntity();
         pic.setUserId(userId);
         pic.setId(PrimaryKeyUtil.nextId());
@@ -159,7 +161,7 @@ public class PictureService extends ServiceImpl<PictureMapper, PictureEntity> {
         final String domain = paramService.getDomain();
         final String rootPath = osManager.getDefaultPath();
         final String uid = "/U" + userId;
-        final String pname = "/" + pic.getName();
+        final String pname = "/" +UUID.randomUUID().toString().substring(0,3)+ pic.getName();
 
         // 上传文件夹为空, 则上传至默认文件夹, 默认文件夹是系统提供的无法删除的文件夹, ID为 userId * -1
         if (pid == null || pid <= 0) {
@@ -177,21 +179,22 @@ public class PictureService extends ServiceImpl<PictureMapper, PictureEntity> {
         pic.setUrl(domain + pic.getPathName());
 
         PictureEntity originPic;
-        if ((originPic = baseMapper.selectByPathName(pic.getPathName())) != null) {
-            // 如果允许重复上传, 则修改大小
-            if (repeatUpload) {
-                PictureEntity upd = new PictureEntity();
-                upd.setId(originPic.getId());
-                upd.setSize(pic.getSize());
-                upd.setCreTime(new Date());
-                baseMapper.updById(upd);
-                pic.setId(originPic.getId());
-            } else {
-                throw new XzException400HTTP("图片[" + pic.getPathName() + "]已存在, 请重命名文件或选择其他路径!");
-            }
-        } else {
-            baseMapper.insert(pic);
-        }
+        // if ((originPic = baseMapper.selectByPathName(pic.getPathName())) != null) {
+        //     // 如果允许重复上传, 则修改大小
+        //     if (repeatUpload) {
+        //         PictureEntity upd = new PictureEntity();
+        //         upd.setId(originPic.getId());
+        //         upd.setSize(pic.getSize());
+        //         upd.setCreTime(new Date());
+        //         baseMapper.updById(upd);
+        //         pic.setId(originPic.getId());
+        //     } else {
+        //         throw new XzException400HTTP("图片[" + pic.getPathName() + "]已存在, 请重命名文件或选择其他路径!");
+        //     }
+        // } else {
+        //     baseMapper.insert(pic);
+        // }
+        baseMapper.insert(pic);
 
         // 入库后进行文件上传操作
         try (InputStream inputStream = file.getInputStream()) {

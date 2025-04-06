@@ -2,40 +2,40 @@
   <div class="app-header-root">
     <div class="drag">{{ tryuseComment }}</div>
     <div class="window-workbench">
-      <el-popover
-        popper-class="caution-popover"
-        ref="PopoverRef"
-        trigger="click"
-        width="350px"
-        :virtual-ref="ButtonRef"
-        :hide-after="10"
-        :tabindex="100"
-        :offset="10"
-        :persistent="false"
-        virtual-triggering>
-        <div v-if="!userStore.isLogin" class="caution-popover-placeholder">登录后查看</div>
-        <div v-else class="caution-content">
-          <bl-row class="caution-row caution-row-warn" v-if="!userStore.paramIsCorrect" @click="showQuickSetting">
-            <bl-col width="40px" height="40px" class="iconbl bl-blog" just="center"></bl-col>
-            <bl-col just="center">您有一些设置需要修改，点击快速设置。</bl-col>
-          </bl-row>
+<!--      <el-popover-->
+<!--        popper-class="caution-popover"-->
+<!--        ref="PopoverRef"-->
+<!--        trigger="click"-->
+<!--        width="350px"-->
+<!--        :virtual-ref="ButtonRef"-->
+<!--        :hide-after="10"-->
+<!--        :tabindex="100"-->
+<!--        :offset="10"-->
+<!--        :persistent="false"-->
+<!--        virtual-triggering>-->
+<!--        <div v-if="!userStore.isLogin" class="caution-popover-placeholder">登录后查看</div>-->
+<!--        <div v-else class="caution-content">-->
+<!--          <bl-row class="caution-row caution-row-warn" v-if="!userStore.paramIsCorrect" @click="showQuickSetting">-->
+<!--            <bl-col width="40px" height="40px" class="iconbl bl-blog" just="center"></bl-col>-->
+<!--            <bl-col just="center">您有一些设置需要修改，点击快速设置。</bl-col>-->
+<!--          </bl-row>-->
 
-          <!-- <bl-row class="caution-row">
-            <bl-col width="40px" height="40px" class="iconbl bl-a-cloudrefresh-line" just="center"></bl-col>
-            <bl-col just="center">发现新版本，点击查看更新内容。</bl-col>
-          </bl-row> -->
+<!--          &lt;!&ndash; <bl-row class="caution-row">-->
+<!--            <bl-col width="40px" height="40px" class="iconbl bl-a-cloudrefresh-line" just="center"></bl-col>-->
+<!--            <bl-col just="center">发现新版本，点击查看更新内容。</bl-col>-->
+<!--          </bl-row> &ndash;&gt;-->
 
-          <bl-row class="no-more" just="center"> 无更多内容 </bl-row>
-        </div>
-        <bl-row v-if="userStore.isLogin" class="caution-footer" just="flex-end">
-          <div @click="showQuickSetting">快速配置</div>
-        </bl-row>
-      </el-popover>
-      <div
-        v-if="!props.simple"
-        :class="['iconbl', 'bl-caution-line', userStore.paramIsCorrect ? '' : 'warn-heightlight']"
-        ref="ButtonRef"
-        v-click-outside="onClickOutside"></div>
+<!--          <bl-row class="no-more" just="center"> 无更多内容 </bl-row>-->
+<!--        </div>-->
+<!--        <bl-row v-if="userStore.isLogin" class="caution-footer" just="flex-end">-->
+<!--          <div @click="showQuickSetting">快速配置</div>-->
+<!--        </bl-row>-->
+<!--      </el-popover>-->
+<!--      <div-->
+<!--        v-if="!props.simple"-->
+<!--        :class="['iconbl', 'bl-caution-line', userStore.paramIsCorrect ? '' : 'warn-heightlight']"-->
+<!--        ref="ButtonRef"-->
+<!--        v-click-outside="onClickOutside"></div>-->
 
       <el-tooltip content="主题配置" popper-class="is-small" transition="none" effect="light" placement="top" :show-after="0" :hide-after="0">
         <div v-if="!props.simple" class="iconbl bl-a-colorpalette-line" @click="themeStrore.show()"></div>
@@ -59,9 +59,9 @@
     </div>
   </div>
 
-  <el-drawer class="web-collect-drawer" size="420" v-model="isShowWebDrawer">
-    <WebCollect></WebCollect>
-  </el-drawer>
+<!--  <el-drawer class="web-collect-drawer" size="420" v-model="isShowWebDrawer">-->
+<!--    <WebCollect></WebCollect>-->
+<!--  </el-drawer>-->
 
   <el-dialog
     v-model="isShowQuickSetting"

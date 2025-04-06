@@ -39,7 +39,7 @@ export const getUserId = () => {
 
 export const getSysName = () => {
   if (isNull(window.blconfig.SYS.NAME)) {
-    return 'Blossom'
+    return 'Cross-end Blog'
   }
   return window.blconfig.SYS.NAME
 }

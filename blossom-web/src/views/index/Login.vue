@@ -2,7 +2,7 @@
   <div class="login-root">
     <div class="login-form">
       <bl-col just="center" class="logo" height="auto">
-        <img src="/blog-logo.png" :style="getThemeLogoStyle()" />
+        <img src="/logo：白.png" :style="getThemeLogoStyle()" />
         <br />
         <bl-row class="title" just="center">{{ getSysName() }}</bl-row>
       </bl-col>

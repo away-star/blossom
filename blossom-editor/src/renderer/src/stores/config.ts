@@ -75,6 +75,8 @@ export interface PicStyle {
   // 最大上传限制
   maxSize: number
   // 是否自动添加文件后缀
+  // 默认值设置为true
+
   isAddSuffix: boolean
 }
 
@@ -122,7 +124,8 @@ export const useConfigStore = defineStore('configStore', {
     // 图片配置
     picStyle: {
       ...{
-        maxSize: 50
+        maxSize: 50,
+        isAddSuffix: true
       },
       ...Local.get(PIC_STYLE_KEY)
     },

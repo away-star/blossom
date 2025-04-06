@@ -41,8 +41,8 @@ const DEFAULT_USER_INFO = {
   userParams: {
     WEB_ARTICLE_URL: '',
     WEB_IPC_BEI_AN_HAO: '',
-    WEB_LOGO_NAME: '',
-    WEB_LOGO_URL: '',
+    WEB_LOGO_NAME: 'Cross-end Blog',
+    WEB_LOGO_URL: 'logo：白.png',
     WEB_GONG_WANG_AN_BEI: '',
     WEB_BLOG_URL_ERROR_TIP_SHOW: 1,
     WEB_BLOG_LINKS: '',

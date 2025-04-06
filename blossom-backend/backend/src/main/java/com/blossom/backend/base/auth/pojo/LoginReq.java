@@ -37,4 +37,6 @@ public class LoginReq extends AbstractPOJO {
      * 密码, grantType = password 时必填
      */
     private String password;
+
+
 }

@@ -9,6 +9,7 @@ import com.blossom.backend.base.auth.exception.AuthException;
 import com.blossom.backend.base.auth.exception.AuthRCode;
 import com.blossom.backend.base.auth.pojo.AccessToken;
 import com.blossom.backend.base.auth.repo.TokenRepository;
+import com.blossom.backend.base.user.UserTypeEnum;
 import com.blossom.common.base.util.ServletUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,8 +38,8 @@ public class CaffeineTokenValidateFilter {
     /**
      * 执行过滤器
      *
-     * @param request         request
-     * @param response        response
+     * @param request  request
+     * @param response response
      * @throws IOException      io
      * @throws ServletException servlet
      */
@@ -50,9 +51,9 @@ public class CaffeineTokenValidateFilter {
         // 解析请求头中的 token
         String token = getHeaderToken(request);
 
-        if (token==null){
-
-        }
+        // if (token==null){
+        //
+        // }
 
 
         // 如果白名单且无token, 则直接放行
@@ -62,6 +63,12 @@ public class CaffeineTokenValidateFilter {
 
         // 根据 token 取出 Redis 中的授权数据
         AccessToken accessToken = tokenRepository.getToken(token);
+
+
+        // 将 accessToken 中的用户id转为邀请者的id
+        if (accessToken != null && accessToken.getMetadata().get("type").equals(UserTypeEnum.READONLY.getType().toString())) {
+            accessToken.setUserId(Long.valueOf(accessToken.getMetadata().get("creById")));
+        }
 
         // 如果是白名单请求没有授权信息,则构造空的授权信息到上下文,异常由调用方捕获
         if (isWhiteList && null == accessToken) {
@@ -82,6 +89,8 @@ public class CaffeineTokenValidateFilter {
         if (!isWhiteList && null == accessToken) {
             throw new AuthException(AuthRCode.INVALID_TOKEN);
         }
+
+
         // 将授权数据存放到上下文中,并执行下一过滤器
         setAuthContext(accessToken);
     }

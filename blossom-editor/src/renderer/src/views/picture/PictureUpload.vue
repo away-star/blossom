@@ -12,13 +12,14 @@
       :headers="{ Authorization: 'Bearer ' + userStore.auth.token }"
       :show-file-list="true"
       :before-upload="beforeUpload"
-      :on-success="onUploadSeccess"
+      :on-success="onUploadSeccess2"
       :on-error="onError">
       <bl-row v-if="!curFolder || !curFolder?.id" just="center" align="center" height="100%" style="font-size: 12px"
-        >请先选择文件夹，再上传文件</bl-row
+      >请先选择文件夹，再上传文件
+      </bl-row
       >
       <bl-row v-else just="center" align="center" height="100%" style="font-size: 12px">
-        点击或拖拽上传至<br />
+        点击或拖拽上传至<br/>
         《{{ curFolder?.name }}》
       </bl-row>
     </el-upload>
@@ -26,23 +27,40 @@
 </template>
 
 <script setup lang="ts">
-import { inject } from 'vue'
-import { UploadRawFile } from 'element-plus'
-import { uploadFileApiUrl } from '@renderer/api/blossom'
-import { useUserStore } from '@renderer/stores/user'
-import { useServerStore } from '@renderer/stores/server'
-import { provideKeyDocInfo } from '@renderer/views/doc/doc'
-import { beforeUpload, onUploadSeccess, onError, uploadDate } from '@renderer/views/picture/scripts/picture'
+import {inject} from 'vue'
+import {UploadProps, UploadRawFile} from 'element-plus'
+import {uploadFileApiUrl} from '@renderer/api/blossom'
+import {useUserStore} from '@renderer/stores/user'
+import {useServerStore} from '@renderer/stores/server'
+import {provideKeyDocInfo} from '@renderer/views/doc/doc'
+import {
+  beforeUpload,
+  onUploadSeccess,
+  onError,
+  uploadDate,
+  handleUploadSeccess
+} from '@renderer/views/picture/scripts/picture'
 
 const porps = defineProps({
   repeatUpload: {
     type: Boolean,
     default: false
+  },
+  onActionRefresh: {
+    type: Function,
+    required: true
   }
 })
 
 // 当前菜单中选择的文档
 const curFolder = inject(provideKeyDocInfo)
+
+const onUploadSeccess2: UploadProps['onSuccess'] = (resp, _file?) => {
+  handleUploadSeccess(resp)
+  // 刷新当前网页
+  // window.location.reload();
+  porps.onActionRefresh();
+}
 
 //#region ----------------------------------------< panin store >--------------------------------------
 const userStore = useUserStore()

@@ -32,4 +32,5 @@ public class LoginDTO extends LoginReq {
      * token 快照
      */
     private String accessTokenSnapshot;
+
 }

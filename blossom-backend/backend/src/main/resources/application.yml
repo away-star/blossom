@@ -1,5 +1,5 @@
 server:
-  port: 9999
+  port: 80
   compression:
     enabled: true
     # 响应内容长度(Content-Length)进行压缩, 默认值为 2048 (2KB,不带单位时默认为字节)
@@ -14,7 +14,7 @@ spring:
   application:
     name: blossom-backend
   profiles:
-    active: prod
+    active: pprodout
   servlet:
     multipart:
       max-file-size: 50MB
@@ -66,6 +66,8 @@ mybatis-plus:
       where-strategy: not_null
       # logic-delete-field: 'delTime'
       # logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
 
 # pageHelper 分页配置
 pagehelper:

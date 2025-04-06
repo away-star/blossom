@@ -76,4 +76,9 @@ public class UserEntity extends AbstractPOJO implements Serializable {
      */
     private Long delTime;
 
+    private String creBy;
+    private String updBy;
+    private String delBy;
+
+
 }

@@ -88,15 +88,15 @@ watch(
  * 跳转页面, 非登录状态无法跳转
  */
 const toRoute = (menu: AsideMenu) => {
-  // if (menu.login && !isLogin()) {
-  //   ElNotification.error({
-  //     title: '未登录',
-  //     message: `你的登录状态已失效, 请在左下角登录 ↙`,
-  //     offset: 30,
-  //     position: 'bottom-left'
-  //   })
-  //   return
-  // }
+  if (menu.login && !isLogin()) {
+    ElNotification.error({
+      title: '未登录',
+      message: `你的登录状态已失效, 请在左下角登录 ↙`,
+      offset: 30,
+      position: 'bottom-left'
+    })
+    return
+  }
   activeMenuPath.value = menu.path
   router.push(menu.path)
 }
@@ -129,7 +129,7 @@ const isLogin = () => {
   }
 
   .aside-item-container {
-    @include box(100%, calc(100% - 105px));
+    @include box(100%, calc(100% - 15px));
     @include flex(column, space-between, center);
     border-top-right-radius: 10px;
     background-color: var(--bl-bg-color);
@@ -143,7 +143,7 @@ const isLogin = () => {
       @include box(100%, calc(100% - 100px - 65px - 68px));
       @include flex(column, flex-start, center);
       @include themeColor(#909399, #a3a6ad);
-      padding-top: 7px;
+      padding-top: 2px;
       border-top-right-radius: 10px;
 
       .is-active {

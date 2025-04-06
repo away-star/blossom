@@ -57,7 +57,7 @@ public abstract class AbstractAuthService {
         fillConfig(accessToken);
         genToken(accessToken);
         saveToken(accessToken);
-        publishEvent(request, accessToken, login);
+        // publishEvent(request, accessToken, login);
         return accessToken;
     }
 
@@ -131,5 +131,6 @@ public abstract class AbstractAuthService {
         accessToken.getMetadata().put("userId", String.valueOf(user.getId()));
         accessToken.getMetadata().put("username", user.getUsername());
         accessToken.getMetadata().put("type", user.getType().toString());
+        accessToken.getMetadata().put("creById",user.getCreBy());
     }
 }
